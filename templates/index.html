@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processador de Imagens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cropperjs.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="theme-color" content="#032b35">
+    <meta name="color-scheme" content="light">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Processador de Imagens</h1>
+
+        <div class="upload-section" id="dropZone">
+            <div class="upload-content">
+                <img src="{{ url_for('static', filename='img/upload-icon.png') }}" alt="upload-icon">
+                <h3>Arraste e solte suas imagens aqui</h3>
+                <p>ou</p>
+                <label for="imageInput" class="custom-file-upload">
+                    Escolher Arquivos
+                </label>
+                <input type="file" id="imageInput" accept=".jpg,.jpeg,.png" multiple>
+                <p class="info">Máximo 25 imagens (JPG, JPEG, PNG)</p>
+            </div>
+            <div class="upload-progress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <p class="progress-text">Carregando...</p>
+            </div>
+        </div>
+
+        <div class="selection-controls" style="display: none;">
+            <div class="select-all-wrapper">
+                <input type="checkbox" id="selectAll">
+                <label for="selectAll">Selecionar Todas</label>
+            </div>
+            <button id="deleteSelected" class="danger-button" disabled>
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+                </svg>
+                Excluir Selecionadas
+            </button>
+        </div>
+
+        <div class="date-section">
+            <label for="dateInput">Legenda para inserir nas imagens (opcional):</label>
+            <input type="text" id="dateInput" placeholder="Legenda (opcional)">
+            <img src="{{ url_for('static', filename='img/info-icon.png') }}" alt="info-icon"
+                title="Texto ou data opcional que ficará no canto superior direito da imagem">
+        </div>
+
+        <div class="image-preview" id="imagePreview">
+            <div class="loading-overlay" style="display: none;">
+                <div class="spinner"></div>
+                <p>Carregando imagens...</p>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="processBlurButton" disabled>
+                <span class="button-content">Borrar/Redimensionar</span>
+                <div class="button-loader" style="display: none;"></div>
+            </button>
+            <button id="processButton">
+                <span class="button-content">Processar Imagens (Inserir Legenda)</span>
+                <div class="button-loader" style="display: none;"></div>
+            </button>
+            <button id="downloadButton" disabled>Baixar Imagens (Editadas)</button>
+        </div>
+
+
+        <!-- Modal para cropping -->
+        <div id="cropModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="crop-container">
+                    <img id="cropImage" src="">
+                </div>
+                <button id="cropButton">Cortar Imagem</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/jszip.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cropperjs.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

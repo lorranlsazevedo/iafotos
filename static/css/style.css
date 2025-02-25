@@ -1,0 +1,453 @@
+:root {
+    --primary-color: #032b35;
+    --hover-color: #065169;
+    --background-color: #f8f9fa;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #444444;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.upload-section {
+    margin: 2rem 0;
+    padding: 3rem 2rem;
+    border: 2px dashed #ccc;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: var(--transition);
+    background-color: #ffffff;
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-section.drag-over {
+    border-color: var(--primary-color);
+    background-color: rgba(67, 97, 238, 0.05);
+    transform: scale(1.01);
+}
+
+.upload-content {
+    width: 100%;
+}
+
+.upload-icon {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.drag-over .upload-icon {
+    transform: scale(1.1);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 12px 24px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+    margin: 1rem 0;
+}
+
+.custom-file-upload:hover {
+    background: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+.upload-section h3 {
+    color: #333;
+    margin: 1rem 0;
+    font-weight: 500;
+}
+
+.upload-section p {
+    color: #666;
+    margin: 0.5rem 0;
+}
+
+.upload-progress {
+    position: absolute;
+    width: 90%;
+    text-align: center;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary-color);
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Animação de pulso para o drag & drop */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.drag-over {
+    animation: pulse 1s infinite;
+}
+
+.date-section {
+    margin: 2rem 0;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+input[type="text"] {
+    padding: 0.8rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+.image-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.preview-container {
+    position: relative;
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 115px;
+    max-height: 115px;
+    background: white;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    overflow: hidden;
+    border: 0.5px solid #ccc;
+}
+
+.preview-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.preview-container img {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: calc(var(--border-radius) - 4px);
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    justify-content: center;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+button:hover:not(:disabled) {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.close {
+    color: #666;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close:hover {
+    color: #333;
+}
+
+.crop-container {
+    max-height: 70vh;
+    margin: 2rem 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.crop-container img {
+    max-width: 100%;
+    max-height: 60vh;
+}
+
+/* Botão de edição nas previews */
+.edit-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(3, 43, 53, 0.9);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: calc(var(--border-radius) - 4px);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.preview-container:hover .edit-button {
+    opacity: 1;
+}
+
+.info {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.preview-container {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 435px) {
+    .image-preview {
+        justify-items: center;
+    }
+
+    #dateInput {
+        width: 76%;
+    }
+}
+
+.selection-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+}
+
+.select-all-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.select-all-wrapper input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.danger-button {
+    background-color: #dc3545;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.danger-button:hover {
+    background-color: #c82333;
+}
+
+.danger-button:disabled {
+    background-color: #dc354580;
+}
+
+.preview-container .select-checkbox {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 18px;
+    height: 18px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.button-loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ffffff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.preview-container.selected {
+    border: 0.5px solid var(--primary-color);
+    transform: scale(0.98);
+}
+
+#processButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+}
+
+#dateInput {
+    font-size: 14px;
+}
+
+.date-section img {
+    cursor: pointer;
+}

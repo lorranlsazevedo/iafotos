@@ -4,7 +4,9 @@ import os
 import cv2
 import zipfile
 import io
-import shutil  # Para limpar pastas
+import shutil
+import webbrowser
+import threading
 
 from backend.detector import process_image_cv2 as process_image
 
@@ -130,6 +132,9 @@ def process_blur_resize():
         download_name='imagens_borradas_redimensionadas.zip'
     )
 
+def open_browser():
+    webbrowser.open("http://127.0.0.1:5000")
 
 if __name__ == "__main__":
+    threading.Timer(1, open_browser).start()  # Aguarda 1 segundo e abre o navegador
     app.run(debug=True)

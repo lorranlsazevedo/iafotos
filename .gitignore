@@ -1,0 +1,51 @@
+# Ambiente virtual
+venv/
+.venv/
+env/
+
+
+# Arquivos teste
+**/test*.py
+**/teste*.py
+**/tests/
+teste/
+#Ignorar historico
+historico/
+
+#Ignorar lotes JSON
+lot*.json
+lote*.json
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.swp
+
+# Arquivos de saída
+relatorios/
+*.xlsx 
+
+# Arquivos temporários do Office
+~$*
+.~lock.*
+
+
+
+**/__pycache__/
+**/*.pyc
+
+
+__pycache__/
+*.pyc

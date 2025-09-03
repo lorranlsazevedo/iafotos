@@ -293,29 +293,46 @@ async function processImages() {
 
             // Só adicionar a legenda se ela existir
             if (date.trim()) {
+                // --- INÍCIO DAS ALTERAÇÕES ---
+
+                // --- PONTO DE AJUSTE ---
+                // Mude este valor para aumentar ou diminuir o espaçamento
+                const padding = 5; 
+
                 // Configurar o estilo do texto
-                ctx.font = '20px Arial';
+                const fontSize = 14;
+                ctx.font = `bold ${fontSize}px Arial`;
+                ctx.textBaseline = 'top'; 
 
                 // Calcular a largura do texto
                 const textWidth = ctx.measureText(date).width;
-                const padding = 5;
 
-                // Posicionar o texto
-                const xPosition = canvas.width - textWidth - 10;
-                const yPosition = 25;
+                // Calcular as dimensões do fundo branco (agora com padding)
+                const backgroundWidth = textWidth + (padding * 2);
+                const backgroundHeight = fontSize + (padding * 2);
 
-                // Desenhar o fundo branco
+                // Calcular a posição do fundo branco para colar na direita
+                const backgroundX = canvas.width - backgroundWidth;
+                const backgroundY = 0; // Continua colado no topo
+
+                // Desenhar o fundo branco (maior que o texto)
                 ctx.fillStyle = 'white';
                 ctx.fillRect(
-                    xPosition - padding,
-                    yPosition - 20,
-                    textWidth + (padding * 2),
-                    30
+                    backgroundX,
+                    backgroundY,
+                    backgroundWidth,
+                    backgroundHeight
                 );
+
+                // Calcular a posição do texto (deslocado pelo padding)
+                const textX = backgroundX + padding;
+                const textY = backgroundY + padding;
 
                 // Desenhar o texto
                 ctx.fillStyle = 'black';
-                ctx.fillText(date, xPosition, yPosition);
+                ctx.fillText(date, textX, textY);
+
+                // --- FIM DAS ALTERAções ---
             }
 
             processedImages.push({
